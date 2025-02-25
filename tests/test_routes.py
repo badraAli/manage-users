@@ -1,6 +1,11 @@
+import sys
+import os
 import pytest
+
+# Ajoutez le répertoire racine au PYTHONPATH
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from app import create_app, db
-from app.models import User
 
 @pytest.fixture
 def app():
