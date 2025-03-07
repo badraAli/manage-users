@@ -1,10 +1,15 @@
 pipeline {
     agent any
 
+    // Defining the environment variables
+    environment {
+        NEW_VERSION = 'V1.0.0'
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo "Building the applicatoion ....."
+                echo "Building the applicatoion version ${NEW_VERSION} ....."
             }
         }
         stage('Test') {
@@ -32,12 +37,6 @@ pipeline {
         }
         failure {
             echo "This will run only if the pipeline is failed " 
-        }
-        unstable {
-            echo "This will run only if the pipeline is unstable"
-        }
-        changed {
-            echo "This will run only if the pipeline is changed"
         }
     }
 }
