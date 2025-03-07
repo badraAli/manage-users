@@ -8,6 +8,11 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                 echo "Testing the applicatoion ....."
             }
@@ -16,6 +21,23 @@ pipeline {
             steps {
                 echo "Deploying the applicatoion ....."
             }
+        }
+    }
+    post {
+        always {
+            echo "This will always run"
+        }
+        success {
+            echo "This will run only if the pipeline is successful"
+        }
+        failure {
+            echo "This will run only if the pipeline is failed"
+        }
+        unstable {
+            echo "This will run only if the pipeline is unstable"
+        }
+        changed {
+            echo "This will run only if the pipeline is changed"
         }
     }
 }
