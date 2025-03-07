@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building the applicatoion version ${{ secrets.NEW_VERSION }} ....."
+                echo "Building the applicatoion version ${NEW_VERSION} ....."
             }
         }
         stage('Test') {
