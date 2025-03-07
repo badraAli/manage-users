@@ -1,15 +1,11 @@
 pipeline {
     agent any
 
-    // Defining the environment variables
-    environment {
-        NEW_VERSION = 'V1.0.0'
-    }
-
+   
     stages {
         stage('Build') {
             steps {
-                echo "Building the applicatoion version ${NEW_VERSION} ....."
+                echo "Building the applicatoion version ${{ secrets.NEW_VERSION }} ....."
             }
         }
         stage('Test') {
