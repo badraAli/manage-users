@@ -31,7 +31,7 @@ pipeline {
             echo "This will run only if the pipeline is successful"
         }
         failure {
-            echo "This will run only if the pipeline is failed"
+            echo "This will run only if the pipeline is failed " 
         }
         unstable {
             echo "This will run only if the pipeline is unstable"
