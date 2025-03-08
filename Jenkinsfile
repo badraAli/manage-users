@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing the application ....."
-                sh 'source venv/bin/activate && pytest tests/'
+                sh '. venv/bin/activate && pytest tests/'
             }
         }
 
