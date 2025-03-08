@@ -3,7 +3,7 @@ pipeline {
 
    
     stages {
-        
+
         stage('Build') {
             steps {
                 echo "Building the applicatoion version ${NEW_VERSION} ....."
@@ -31,19 +31,13 @@ pipeline {
                 echo "Coniguring AWS CLI ....."
                 sh 'aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"'
                 sh 'aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"'
-            }
 
-            steps {
                 echo "Logging into AWS ECR ....."
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891377325592.dkr.ecr.us-east-1.amazonaws.com'
-            }
 
-            steps {
                 echo "Tagging the docker image ....."
                 sh 'docker tag manage-users-image:1.0 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.0'
-            }
 
-            steps {
                 echo "Pushing the docker image to AWS ECR ....."
                 sh 'docker push 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.0'
             }
