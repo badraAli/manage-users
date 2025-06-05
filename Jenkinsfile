@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building the docker image ....."
-                sh 'docker buildx build -t manage-users-image:1.3 . --load'
+                sh 'docker buildx build --provenance false -t manage-users-image:1.3 . --load'
             }
         }
 
