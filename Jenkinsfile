@@ -6,7 +6,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Building the applicatoion version 1.3 ....."
+                echo "Building the applicatoion version 1.4 ....."
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate && pip install -r requirements.txt'
             }
@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building the docker image ....."
-                sh 'docker buildx build --provenance false -t manage-users-image:1.3 . --load'
+                sh 'docker buildx build --provenance false -t manage-users-image:1.4 . --load'
             }
         }
 
@@ -33,10 +33,10 @@ pipeline {
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891377325592.dkr.ecr.us-east-1.amazonaws.com'
 
                 echo "Tagging the docker image ....."
-                sh 'docker tag manage-users-image:1.3 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.3'
+                sh 'docker tag manage-users-image:1.4 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.4'
 
                 echo "Pushing the docker image to AWS ECR ....."
-                sh 'docker push 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.3'
+                sh 'docker push 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:1.4'
             }
         }
     }
