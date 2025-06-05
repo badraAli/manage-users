@@ -41,7 +41,7 @@ pipeline {
                 sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891377325592.dkr.ecr.us-east-1.amazonaws.com"
 
                 echo "Tagging the docker image ....."
-                sh "docker tag manage-users-image:${params.VERSIONON} 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:${params.VERSION}"
+                sh "docker tag manage-users-image:${params.VERSION} 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:${params.VERSION}"
 
                 echo "Pushing the docker image to AWS ECR ....."
                 sh "docker push 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:${params.VERSION}"
