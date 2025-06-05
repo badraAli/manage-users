@@ -34,7 +34,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Docker Image to AWS ECR') {
+        stage('Push Docker Image to AWS ECR') {
             steps {
 
                 echo "Logging into AWS ECR ....."
@@ -45,6 +45,19 @@ pipeline {
 
                 echo "Pushing the docker image to AWS ECR ....."
                 sh "docker push 891377325592.dkr.ecr.us-east-1.amazonaws.com/manage-users-image:${params.VERSION}"
+            }
+        }
+
+        stage('Deploy application') {
+            input {
+                message "where to deploy the application?"
+                ok "Deploy"
+                parameters {
+                    choice(name: 'DEPLOY_ENVIRONMENT', choices: ['development', 'staging', 'production'], description: 'Select the environment to deploy the application')
+                }
+            }
+            steps {
+                echo "Deploying the application to ${params.DEPLOY_ENV} environment with version ${params.VERSION} ....."
             }
         }
     }
